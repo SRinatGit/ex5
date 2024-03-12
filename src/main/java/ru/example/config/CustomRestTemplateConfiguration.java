@@ -27,9 +27,9 @@ public class CustomRestTemplateConfiguration {
 
    @Bean
    public RestTemplate restTemplate() throws KeyManagementException, NoSuchAlgorithmException, KeyStoreException, CertificateException, MalformedURLException, IOException {
-      HttpClientConnectionManager cm = PoolingHttpClientConnectionManagerBuilder.create().build();
-      CloseableHttpClient httpClient = HttpClients.custom().setConnectionManager(cm).build();
-      ClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
+         var cm = PoolingHttpClientConnectionManagerBuilder.create().build();
+         var httpClient = HttpClients.custom().setConnectionManager(cm).build();
+         var requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
       return new RestTemplate(requestFactory);
    }
 }

@@ -40,22 +40,22 @@ public class ProductAgreementController {
             AccountPoolService accountPoolService,
             AgreementService agreementService,
             ProductRegisterTypeService productRegisterTypeService) {
-        this.instanceRequestValidationService = instanceRequestValidationService;
-        this.accountTypeService = accountTypeService;
-        this.productService = productService;
-        this.productRegisterService = productRegisterService;
-        this.accountPoolService = accountPoolService;
-        this.agreementService = agreementService;
-        this.productRegisterTypeService = productRegisterTypeService;
-    }
+                                        this.instanceRequestValidationService = instanceRequestValidationService;
+                                        this.accountTypeService = accountTypeService;
+                                        this.productService = productService;
+                                        this.productRegisterService = productRegisterService;
+                                        this.accountPoolService = accountPoolService;
+                                        this.agreementService = agreementService;
+                                        this.productRegisterTypeService = productRegisterTypeService;
+                                                                    }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
+            var fieldName = ((FieldError) error).getField();
+            var errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
         return errors;
@@ -94,10 +94,10 @@ public class ProductAgreementController {
                     var product = this.productService.saveFromRequest(request);
                     logger.info("product: " + String.valueOf(product));
                     List<ProductRegister> productRegisters = new ArrayList();
-                    Iterator var24 = productRegisterTypeList.iterator();
+                    Iterator varIter = productRegisterTypeList.iterator();
 
-                    while (var24.hasNext()) {
-                        var productRegisterType = (ProductRegisterType) var24.next();
+                    while (varIter.hasNext()) {
+                        var productRegisterType = (ProductRegisterType) varIter.next();
                         logger.info("branchCode: " + request.branchCode());
                         logger.info("isoCurrencyCode: " + request.isoCurrencyCode());
                         logger.info("mdmCode: " + request.mdmCode());
@@ -114,7 +114,6 @@ public class ProductAgreementController {
                             this.productService.delete(product);
                             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CreateProductAgreementNotFound(new ResponseDataErr(this.accountPoolService.getAccountNotFoundMessage(request.branchCode(), request.isoCurrencyCode(), request.mdmCode(), request.urgencyCode(), productRegisterType.getValue()))));
                         }
-
                         productRegisters.add(this.productRegisterService.saveByParams(product, productRegisterType, account, request.isoCurrencyCode()));
                     }
 
@@ -129,11 +128,9 @@ public class ProductAgreementController {
             }
         } else {
             if (request.instanceArrangements().length > 0) {
-                InstanceArrangement[] var2 = request.instanceArrangements();
-                int var3 = var2.length;
-
-                for (int var4 = 0; var4 < var3; ++var4) {
-                    InstanceArrangement roll = var2[var4];
+                InstanceArrangement[] varInstance = request.instanceArrangements();
+                for (int idx = 0; idx < varInstance.length; ++idx) {
+                    InstanceArrangement roll = varInstance[idx];
                     var step3Response = this.instanceRequestValidationService.isExistsRollByArrangementNumber(request.contractNumber(), roll.number());
                     logger.info("step3Response: " + step3Response);
                     if (!step3Response.equals("")) {
@@ -152,15 +149,13 @@ public class ProductAgreementController {
                         .body(new CreateProductAgreementNotFound(new ResponseDataErr(this.productService.getProductNotFoundMessage(request.instanceId()))));
             } else {
                 Logger var10000 = logger;
-                var var10001 = request.instanceId();
-                var10000.info("Нашли продукт по instanceId <" + var10001 + ">: " + ((Product) prodOpt.get()).toString());
+                var varInstanceId = request.instanceId();
+                logger.info("Нашли продукт по instanceId <" + varInstanceId + ">: " + ((Product) prodOpt.get()).toString());
                 List<Agreement> agreements = new ArrayList();
                 if (request.instanceArrangements().length > 0) {
-                    InstanceArrangement[] var14 = request.instanceArrangements();
-                    var var17 = var14.length;
-
-                    for (int var22 = 0; var22 < var17; ++var22) {
-                        InstanceArrangement rollRequest = var14[var22];
+                    InstanceArrangement[] varInstArg = request.instanceArrangements();
+                    for (int idx = 0; idx < varInstArg.length; ++idx) {
+                        InstanceArrangement rollRequest = varInstArg[idx];
                         agreements.add(this.agreementService.saveFromRequest((Product) prodOpt.get(), rollRequest));
                     }
                 }

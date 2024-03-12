@@ -19,8 +19,4 @@ public enum CoefficientAction {
       }
    }
 
-   // $FF: synthetic method
-//   private static CoefficientAction[] $values() {
-//      return new CoefficientAction[]{PLUS, MINUS};
-//   }
 }

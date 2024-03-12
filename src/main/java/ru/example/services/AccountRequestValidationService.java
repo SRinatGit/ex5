@@ -28,42 +28,40 @@ public class AccountRequestValidationService implements ErrorMessage, Validation
    }
 
    public String isValidRequest(ProductRegisterController.CorporateSettlementAccountRequest request) {
-      String response = "";
+      var response = "";
       if (request.instanceId() == null) {
          response = ERROR_NECESSARY_FIELDS.replaceAll(INSTANCE_ID, "");
       }
-
       return response;
    }
 
    public String isExistsByProductIdAndType(ProductRegisterController.CorporateSettlementAccountRequest request) {
-      String response = "";
+      var response = "";
       List<ProductRegister> prWithProductIdAndType = this.productRegisterService.findByProductId(request.instanceId()).stream().filter((x) -> {
-         return x.getProductRegisterType().getRegisterTypeName().equals(request.registryTypeCode());
-      }).toList();
+                              return x.getProductRegisterType().getRegisterTypeName().equals(request.registryTypeCode());
+                                 }).toList();
       if (prWithProductIdAndType.size() > 0) {
          response = ERROR_PR_EXISTS.replaceAll(REGISTRY_TYPE_CODE_VALUE, request.registryTypeCode());
-         String ids = "";
+         var idStr = "";
 
          ProductRegister pr;
-         for(Iterator var5 = prWithProductIdAndType.iterator(); var5.hasNext(); ids = ids + pr.getProduct().getId() + ",") {
-            pr = (ProductRegister)var5.next();
+         for(Iterator varIter = prWithProductIdAndType.iterator(); varIter.hasNext(); idStr = idStr + pr.getProduct().getId() + ",") {
+            pr = (ProductRegister)varIter.next();
          }
-
-         response = response.replaceAll(IDS, ids);
+         response = response.replaceAll(IDS, idStr);
       }
 
       return response;
    }
 
    public String isExistsProductCode(ProductRegisterController.CorporateSettlementAccountRequest request, Product product) {
-      String response = "";
+      var response = "";
       List<ProductRegisterType> prTypes = this.productRegisterTypeService.findAllByValue(product.getProductCodeId());
-      boolean isExists = false;
-      Iterator var6 = prTypes.iterator();
+      var isExists = false;
+      Iterator varIter = prTypes.iterator();
 
-      while(var6.hasNext()) {
-         ProductRegisterType prt = (ProductRegisterType)var6.next();
+      while(varIter.hasNext()) {
+         ProductRegisterType prt = (ProductRegisterType)varIter.next();
          if (prt.getValue().equals(request.registryTypeCode())) {
             isExists = true;
             break;
