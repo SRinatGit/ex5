@@ -1,0 +1,50 @@
+{
+  "instanceId": 29,
+  "productType": "НСО",
+  "productCode": "03",
+  "registerType": "12345678",
+  "mdmCode": "15",
+  "contractNumber": "77889",
+  "contractDate": "2024-02-01",
+  "priority": 1,
+  "interestRatePenalty": 18.5,
+  "minimalBalance": 10000000.00,
+  "thresholdAmount": null,
+  "accountingDetails": "Some accounting data",
+  "rateType": 0,
+  "taxPercentageRate": null,
+  "technicalOverdraftLimitAmount": null,
+  "contractId": 78563722,
+  "branchCode": "0022",
+  "isoCurrencyCode": "840",
+  "urgencyCode": "00",
+  "ReferenceCode": 453627,
+  "additionalPropertiesVip": {
+    "data": []
+  },
+"instanceArrangements": [
+    {
+      "generalAgreementId": 788989,
+      "supplementaryAgreementId": 5678,
+      "arrangementType": "НСО",
+      "shedulerJobId": 123,
+      "number": 1,
+      "openingDate": "2024-02-28",
+      "closingDate": null,
+      "cancelDate":  null,
+      "validityDuration": 500,
+      "cancellationReason": null,
+      "status": "Открыт",
+      "interestCalculationDate": "2024-03-01",
+      "interestRate": 5,
+      "coefficient": 2,
+      "coefficientAction": "+",
+      "minimumInterestRate": 0,
+      "minimumInterestRateCoefficient": null,
+      "minimumInterestRateCoefficientAction": null,
+      "maximumInterestRate": 0,
+      "maximumInterestRateCoefficient": null,
+      "maximumInterestRateCoefficientAction": null
+    }
+  ]
+}

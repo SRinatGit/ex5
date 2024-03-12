@@ -1,0 +1,21 @@
+2024-03-12 15:37:58,054 INFO  ru.example.Application : Starting Application using Java 21.0.2 with PID 10396 (C:\javacourse\execute5\target\classes started by RSaigafarov in C:\javacourse\execute5)
+2024-03-12 15:37:58,078 INFO  ru.example.Application : No active profile set, falling back to 1 default profile: "default"
+2024-03-12 15:38:02,899 ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'server.port' to java.lang.Integer:
+
+    Property: server.port
+    Value: "${SERVER_PORT}"
+    Origin: class path resource [application.yml] - 3:9
+    Reason: failed to convert java.lang.String to java.lang.Integer (caused by java.lang.NumberFormatException: For input string: "${SERVER_PORT}")
+
+Action:
+
+Update your application's configuration
+

@@ -1,0 +1,57 @@
+version: '3.8'
+services:
+  app:
+    container_name: product-controller
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: application-pr
+    ports:
+      - 8181:8181
+    depends_on:
+      - db
+    networks:
+      - spring-cloud-network
+    environment:
+      - SERVER_PORT= 8181
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5435/product_registry
+      - SPRING_DATASOURCE_USER=postgres
+      - SPRING_DATASOURCE_PASSWORD=ibs
+
+
+  db:
+    image: postgres:14.7-alpine
+    container_name: db
+    restart: on-failure
+    user: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./docker-postgresql-multiple-databases:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: ${PG_USER:-postgres}
+      POSTGRES_PASSWORD: ${PG_PASSWORD:-ibs}
+      POSTGRES_MULTIPLE_DATABASES: product_registry,postgres
+    ports:
+      - '5435:5432'
+
+
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4:7
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  postgres-data:
+  pgadmin-data:
+
+networks:
+  spring-cloud-network:
+    driver: bridge

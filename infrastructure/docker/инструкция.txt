@@ -1,0 +1,33 @@
+https://habr.com/ru/articles/735274/
+
+
+1.создаем каталог C:\docker (в принципе любой путь любой каталог, так проще и ближе добираться)
+    напоняем его файлами
+    - Dockerfile
+    - docker-compose.yml
+    - каталог с файлом docker-postgresql-multiple-databases
+    - каталог target и копируем туда jar основного класса
+2.
+--- создание контейнера
+C:\docker>docker build -t application-pr .
+--- запуск контейнера
+C:\docker>docker-compose up -d
+
+--- удаляет остановленные контейнеры из кеша
+docker container prune
+
+3. прямой доступ в БД
+Зайдем в браузере на http://localhost:5050/login?next=%2F
+и введем username: admin@admin.com и пароль: root
+Настраиваем доступ на БД (Server->Добавить новый сервер)
+1 name =test_DB 	(произвольное)
+2 host.docker.internal 	(берем из docker-compose.yml файла из строки  SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5435/product_registry)
+3 5435 			(порт берем из docker-compose.yml файла из строки п.2)
+4 product_registry	(имя БД берем из docker-compose.yml файла из строки п.2)
+5 postgres  		(берем из docker-compose.yml файла из строки - POSTGRES_USER: ${PG_USER:-postgres}) 
+6 ibs 			(берем из docker-compose.yml файла из строки POSTGRES_PASSWORD: ${PG_PASSWORD:-ibs})
+
+здесь увидим таблицы и данные
+
+4. Postman
+стартуем и делаем post запросы
