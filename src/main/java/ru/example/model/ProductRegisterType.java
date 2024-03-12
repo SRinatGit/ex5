@@ -3,51 +3,22 @@ package ru.example.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(
-   name = "tpp_ref_product_register_type"
-)
+@Table(name = "tpp_ref_product_register_type")
 public class ProductRegisterType {
    @Id
-   @GeneratedValue(
-      strategy = GenerationType.SEQUENCE,
-      generator = "product_register_type"
-   )
-   @SequenceGenerator(
-      name = "product_register_type",
-      sequenceName = "seq_id",
-      allocationSize = 1
-   )
-   @Column(
-      name = "internal_id",
-      nullable = false
-   )
+   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_register_type")
+   @SequenceGenerator(name = "product_register_type", sequenceName = "seq_id", allocationSize = 1)
+   @Column(name = "internal_id", nullable = false)
    private long id;
-   @Column(
-      name = "value",
-      nullable = false
-   )
+   @Column(name = "value", nullable = false)
    private String value;
-   @Column(
-      name = "register_type_name",
-      nullable = false,
-      unique = true
-   )
+   @Column(name = "register_type_name",nullable = false, unique = true)
    private String registerTypeName;
-   @ManyToOne(
-      cascade = {CascadeType.DETACH}
-   )
-   @JoinColumn(
-      name = "product_class_code",
-      referencedColumnName = "glb_code"
-   )
+   @ManyToOne(cascade = {CascadeType.DETACH})
+   @JoinColumn(name = "product_class_code", referencedColumnName = "glb_code")
    private ProductClass productClass;
-   @OneToOne(
-      cascade = {CascadeType.DETACH}
-   )
-   @JoinColumn(
-      name = "account_type",
-      referencedColumnName = "value"
-   )
+   @OneToOne(cascade = {CascadeType.DETACH})
+   @JoinColumn(name = "account_type", referencedColumnName = "value")
    private AccountType accountType;
 
    public long getId() {

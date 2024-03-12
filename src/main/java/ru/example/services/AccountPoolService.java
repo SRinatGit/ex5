@@ -27,12 +27,11 @@ public class AccountPoolService implements ErrorMessage {
 
    public Account getAccountFromPool(String branchCode, String currencyCode, String mdmCode, String priorityCode, String registryTypeCode) {
       if (!registryTypeCode.equals("")) {
-         AccountPool accountPool = this.findByBranchCodeAndCurrencyCodeAndMdmCodeAndPriorityCodeAndRegistryTypeCode(branchCode, currencyCode, mdmCode, priorityCode, registryTypeCode);
+         var accountPool = this.findByBranchCodeAndCurrencyCodeAndMdmCodeAndPriorityCodeAndRegistryTypeCode(branchCode, currencyCode, mdmCode, priorityCode, registryTypeCode);
          if (accountPool != null) {
             return this.accountService.findFirstByAccountPool(accountPool);
          }
       }
-
       return null;
    }
 

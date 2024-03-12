@@ -32,11 +32,11 @@ public class ProductRegisterController {
             ProductService productService,
             AccountRequestValidationService requestValidationService,
             AccountPoolService accountPoolService) {
-        this.productRegisterService = productRegisterService;
-        this.productService = productService;
-        this.requestValidationService = requestValidationService;
-        this.accountPoolService = accountPoolService;
-    }
+                                this.productRegisterService = productRegisterService;
+                                this.productService = productService;
+                                this.requestValidationService = requestValidationService;
+                                this.accountPoolService = accountPoolService;
+                                                    }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({MethodArgumentNotValidException.class})
@@ -85,7 +85,7 @@ public class ProductRegisterController {
                         var productRegister = this.productRegisterService.saveFromRequest(request, prodOpt.get(), account);
                         logger.info("productRegister: " + productRegister.toString());
                         if (productRegister == null) {
-                            String messageError = "Продуктовый регистр не создан.";
+                            var messageError = "Продуктовый регистр не создан.";
                             return ResponseEntity
                                     .status(HttpStatus.BAD_REQUEST)
                                     .body(new CreateProductRegistryBadRequest(new ResponseDataErr(messageError)));

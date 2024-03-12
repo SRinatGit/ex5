@@ -3,208 +3,62 @@ package ru.example.model;
 import jakarta.persistence.*;
 import java.util.Date;
 @Entity
-@Table(
-   name = "agreements"
-)
+@Table(name = "agreements")
 public class Agreement {
    @Id
-   @GeneratedValue(
-      strategy = GenerationType.SEQUENCE,
-      generator = "agreement_seq"
-   )
-   @SequenceGenerator(
-      name = "agreement_seq",
-      sequenceName = "seq_id",
-      allocationSize = 1
-   )
-   @Column(
-      name = "id",
-      nullable = false
-   )
+   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "agreement_seq")
+   @SequenceGenerator(name = "agreement_seq", sequenceName = "seq_id", allocationSize = 1)
+   @Column(name = "id", nullable = false)
    private long id;
-   @ManyToOne(
-      cascade = {CascadeType.ALL}
-   )
-   @JoinColumn(
-      name = "product_id"
-   )
+   @ManyToOne(cascade = {CascadeType.ALL})
+   @JoinColumn(name = "product_id")
    private Product product;
-   @Column(
-      name = "general_agreement_id"
-   )
+   @Column(name = "general_agreement_id")
    private String generalAgreementId;
-   @Column(
-      name = "supplementary_agreement_id"
-   )
+   @Column(name = "supplementary_agreement_id")
    private String supplementaryAgreementId;
-   @Column(
-      name = "arrangement_type"
-   )
+   @Column(name = "arrangement_type")
    private String arrangementType;
-   @Column(
-      name = "sheduler_job_id"
-   )
+   @Column(name = "sheduler_job_id")
    private long shedulerJobId;
-   @Column(
-      name = "number"
-   )
+   @Column(name = "number")
    private String number;
-   @Column(
-      name = "opening_date"
-   )
+   @Column(name = "opening_date")
    private Date openingDate;
-   @Column(
-      name = "closing_date"
-   )
+   @Column(name = "closing_date")
    private Date closingDate;
-   @Column(
-      name = "cancel_date"
-   )
+   @Column(name = "cancel_date")
    private Date cancelDate;
-   @Column(
-      name = "validity_duration"
-   )
+   @Column(name = "validity_duration" )
    private int validityDuration;
-   @Column(
-      name = "cancellation_reason"
-   )
+   @Column(name = "cancellation_reason")
    private String cancellationReason;
    @Enumerated(EnumType.STRING)
-   @Column(
-      name = "status"
-   )
+   @Column(name = "status")
    private Status status;
-   @Column(
-      name = "interest_calculation_date"
-   )
+   @Column(name = "interest_calculation_date")
    private Date interestCalculationDate;
-   @Column(
-      name = "interest_rate"
-   )
+   @Column(name = "interest_rate")
    private float interestRate;
-   @Column(
-      name = "coefficient"
-   )
+   @Column(name = "coefficient")
    private float coefficient;
-   @Column(
-      name = "coefficient_action"
-   )
+   @Column(name = "coefficient_action")
    private String coefficientAction;
-   @Column(
-      name = "minimum_interest_rate"
-   )
+   @Column(name = "minimum_interest_rate")
    private float minimumInterestRate;
-   @Column(
-      name = "minimum_interest_rate_coefficient"
-   )
+   @Column(name = "minimum_interest_rate_coefficient")
    private String minimumInterestRateCoefficient;
-   @Column(
-      name = "minimum_interest_rate_coefficient_action"
-   )
+   @Column(name = "minimum_interest_rate_coefficient_action")
    private String minimumInterestRateCoefficientAction;
-   @Column(
-      name = "maximum_interest_rate"
-   )
+   @Column(name = "maximum_interest_rate")
    private float maximumInterestRate;
-   @Column(
-      name = "maximum_interest_rate_coefficient"
-   )
+   @Column(name = "maximum_interest_rate_coefficient")
    private String maximumInterestRateCoefficient;
-   @Column(
-      name = "maximum_interest_rate_coefficient_action"
-   )
+   @Column(name = "maximum_interest_rate_coefficient_action")
    private String maximumInterestRateCoefficientAction;
 
    public long getId() {
       return this.id;
-   }
-
-   public Product getProduct() {
-      return this.product;
-   }
-
-   public String getGeneralAgreementId() {
-      return this.generalAgreementId;
-   }
-
-   public String getSupplementaryAgreementId() {
-      return this.supplementaryAgreementId;
-   }
-
-   public String getArrangementType() {
-      return this.arrangementType;
-   }
-
-   public long getShedulerJobId() {
-      return this.shedulerJobId;
-   }
-
-   public String getNumber() {
-      return this.number;
-   }
-
-   public Date getOpeningDate() {
-      return this.openingDate;
-   }
-
-   public Date getClosingDate() {
-      return this.closingDate;
-   }
-
-   public Date getCancelDate() {
-      return this.cancelDate;
-   }
-
-   public int getValidityDuration() {
-      return this.validityDuration;
-   }
-
-   public String getCancellationReason() {
-      return this.cancellationReason;
-   }
-
-   public Status getStatus() {
-      return this.status;
-   }
-
-   public Date getInterestCalculationDate() {
-      return this.interestCalculationDate;
-   }
-
-   public float getInterestRate() {
-      return this.interestRate;
-   }
-
-   public float getCoefficient() {
-      return this.coefficient;
-   }
-
-   public String getCoefficientAction() {
-      return this.coefficientAction;
-   }
-
-   public float getMinimumInterestRate() {
-      return this.minimumInterestRate;
-   }
-
-   public String getMinimumInterestRateCoefficient() {
-      return this.minimumInterestRateCoefficient;
-   }
-
-   public String getMinimumInterestRateCoefficientAction() {
-      return this.minimumInterestRateCoefficientAction;
-   }
-
-   public float getMaximumInterestRate() {
-      return this.maximumInterestRate;
-   }
-
-   public String getMaximumInterestRateCoefficient() {
-      return this.maximumInterestRateCoefficient;
-   }
-
-   public String getMaximumInterestRateCoefficientAction() {
-      return this.maximumInterestRateCoefficientAction;
    }
 
    public void setId(long id) {
